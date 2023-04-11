@@ -1,6 +1,7 @@
 import React from 'react';
-import './Chat.scss';
 import ChatHeader from './ChatHeader';
+import ChatMessage from './ChatMessage';
+import './Chat.scss';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import GifIcon from '@mui/icons-material/Gif';
@@ -10,7 +11,12 @@ function Chat() {
   return (
     <div className='chat'>
       <ChatHeader />
-      <div className='chatMessage'></div>
+      <div className='chatMessage'>
+        <ChatMessage />
+        <ChatMessage />
+        <ChatMessage />
+        <ChatMessage /> 
+      </div>
       <div className='chatInput'>
         <AddCircleOutlineIcon />
         <form>
