@@ -1,14 +1,15 @@
 import React from 'react';
+import { useAppSelector } from './app/hooks';
 import './App.scss';
 import Login from './components/login/Login';
 import Sidebar from './components/sidebar/Sidebar';
 import Chat from './components/chat/Chat';
-import { useSelector } from 'react-redux';
 
 function App() {
 
-  // const user = useSelector((state => state.user.user));
-  const user = null;
+  const user = useAppSelector((state => state.user));
+  // const user = null;
+  console.log(user);
 
   return (
     <div className="App">
