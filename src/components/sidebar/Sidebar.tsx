@@ -1,13 +1,18 @@
 import React from 'react';
 import SidebarChannel from './SidebarChannel';
+import { auth } from '../../firebase';
 import './Sidebar.scss';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import MicIcon from '@mui/icons-material/Mic';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useAppSelector } from '../../app/hooks';
 
 const Sidebar = () => {
+
+  const user = useAppSelector((state) => state.user);
+
   return (
     <div className='sidebar'>
 
@@ -44,10 +49,10 @@ const Sidebar = () => {
 
           <div className='sidebarFooter'>
             <div className='sidebarAccount'>
-              <img src='./logo192.png' />
+              <img src={user?.photo} onClick={() => auth.signOut()}/>
               <div className='accountName'>
-                <h4>ShinCode</h4>
-                <span>#8162</span>
+                <h4>{user?.displayName}</h4>
+                <span>#{user?.uid.substring(0, 4)}</span>
               </div>
             </div>
 
