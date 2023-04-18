@@ -1,59 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import SidebarChannel from './SidebarChannel';
-import { auth, db } from '../../firebase';
-import './Sidebar.scss';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/Add';
-import MicIcon from '@mui/icons-material/Mic';
-import HeadphonesIcon from '@mui/icons-material/Headphones';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { useAppSelector } from '../../app/hooks';
-import useCollection from '../../hooks/useCollection';
-import { addDoc, collection } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import SidebarChannel from "./SidebarChannel";
+import { auth, db } from "../../firebase";
+import "./Sidebar.scss";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import MicIcon from "@mui/icons-material/Mic";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { useAppSelector } from "../../app/hooks";
+import useCollection from "../../hooks/useCollection";
+import { addDoc, collection } from "firebase/firestore";
 // import { collection, query } from 'firebase/firestore/lite';
 
 const Sidebar = () => {
-  const user = useAppSelector((state) => state.user);
-  const { documents: channels } = useCollection('channels');
+  const user = useAppSelector((state) => state.user.user);
+  const { documents: channels } = useCollection("channels");
 
   const addChannel = async () => {
-    let channelName: string | null = prompt('新しいチャンネルを作成します');
+    let channelName: string | null = prompt("新しいチャンネルを作成します");
 
-    if(channelName) {
-      await addDoc(collection(db, 'channels'), {
+    if (channelName) {
+      await addDoc(collection(db, "channels"), {
         channelName: channelName,
-      })
+      });
     }
-  }
+  };
 
   return (
-    <div className='sidebar'>
-
-      <div className='sidebarLeft'>
-        <div className='serverIcon'>
-          <img src='./discordIcon.png' alt='' />
+    <div className="sidebar">
+      <div className="sidebarLeft">
+        <div className="serverIcon">
+          <img src="./discordIcon.png" alt="" />
         </div>
-        <div className='serverIcon'>
-          <img src='./logo192.png' alt='' />
+        <div className="serverIcon">
+          <img src="./logo192.png" alt="" />
         </div>
       </div>
 
-      <div className='sidebarRight'>
-        <div className='sidebarTop'>
+      <div className="sidebarRight">
+        <div className="sidebarTop">
           <div>Discord</div>
           <ExpandMoreIcon />
         </div>
 
-        <div className='sidebarChannels'>
-          <div className='sidebarChannelsHeader'>
-            <div className='sidebarHeader'>
+        <div className="sidebarChannels">
+          <div className="sidebarChannelsHeader">
+            <div className="sidebarHeader">
               <ExpandMoreIcon />
               <h4>プログラミングチャンネル</h4>
             </div>
-            <AddIcon className='sidebarAddIcon' onClick={() => addChannel()} />
+            <AddIcon className="sidebarAddIcon" onClick={() => addChannel()} />
           </div>
 
-          <div className='sidebarChannelList'>
+          <div className="sidebarChannelList">
             {channels.map((channel) => (
               <SidebarChannel
                 channel={channel}
@@ -63,16 +62,16 @@ const Sidebar = () => {
             ))}
           </div>
 
-          <div className='sidebarFooter'>
-            <div className='sidebarAccount'>
-              <img src={user?.photo} onClick={() => auth.signOut()}/>
-              <div className='accountName'>
+          <div className="sidebarFooter">
+            <div className="sidebarAccount">
+              <img src={user?.photo} onClick={() => auth.signOut()} />
+              <div className="accountName">
                 <h4>{user?.displayName}</h4>
                 <span>#{user?.uid.substring(0, 4)}</span>
               </div>
             </div>
 
-            <div className='sidebarVoice'>
+            <div className="sidebarVoice">
               <MicIcon />
               <HeadphonesIcon />
               <SettingsIcon />
@@ -80,9 +79,8 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
