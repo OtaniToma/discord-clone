@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMessage from "./ChatMessage";
 import "./Chat.scss";
@@ -11,16 +11,11 @@ import {
   CollectionReference,
   DocumentData,
   DocumentReference,
-  Timestamp,
   addDoc,
   collection,
-  onSnapshot,
-  orderBy,
-  query,
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import { async } from "@firebase/util";
 import useSubCollection from "../../hooks/useSubCollection";
 
 const Chat = () => {

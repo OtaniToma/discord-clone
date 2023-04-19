@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SidebarChannel from "./SidebarChannel";
 import { auth, db } from "../../firebase";
 import "./Sidebar.scss";
@@ -64,7 +64,11 @@ const Sidebar = () => {
 
           <div className="sidebarFooter">
             <div className="sidebarAccount">
-              <img src={user?.photo} onClick={() => auth.signOut()} />
+              <img
+                src={user?.photo}
+                onClick={() => auth.signOut()}
+                alt={user?.displayName}
+              />
               <div className="accountName">
                 <h4>{user?.displayName}</h4>
                 <span>#{user?.uid.substring(0, 4)}</span>

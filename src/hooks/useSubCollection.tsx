@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   onSnapshot,
   collection,
   query,
-  DocumentData,
-  CollectionReference,
   Timestamp,
   orderBy,
 } from "firebase/firestore";
